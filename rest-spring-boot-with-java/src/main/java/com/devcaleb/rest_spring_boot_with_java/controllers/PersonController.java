@@ -1,5 +1,6 @@
 package com.devcaleb.rest_spring_boot_with_java.controllers;
 
+import com.devcaleb.rest_spring_boot_with_java.data.dto.PersonDTO;
 import com.devcaleb.rest_spring_boot_with_java.model.Person;
 import com.devcaleb.rest_spring_boot_with_java.services.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,22 +17,22 @@ public class PersonController {
     private PersonService service;
 
     @GetMapping(value = "/people")
-    public List<Person> findAll() {
+    public List<PersonDTO> findAll() {
         return service.findAll();
     }
 
     @GetMapping(value = "/{id}")
-    public Person findById(@PathVariable("id") Long id) {
+    public PersonDTO findById(@PathVariable("id") Long id) {
         return service.findById(id);
     }
 
     @PostMapping
-    public Person insert(@RequestBody Person person) {
+    public PersonDTO insert(@RequestBody PersonDTO person) {
         return service.create(person);
     }
 
     @PutMapping
-    public Person update(@RequestBody Person person) {
+    public PersonDTO update(@RequestBody PersonDTO person) {
         return service.update(person);
     }
 
