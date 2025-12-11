@@ -1,16 +1,18 @@
-package com.devcaleb.rest_spring_boot_with_java.data.dto;
+package com.devcaleb.rest_spring_boot_with_java.data.dto.v2;
 
+import java.util.Date;
 import java.util.Objects;
 
-public class PersonDTO {
+public class PersonDTOV2 {
 
     private Long id;
     private String firstName;
     private String address;
+    private Date birthDay;
     private String gender;
     private String lastName;
 
-    public PersonDTO() {
+    public PersonDTOV2() {
     }
 
     public Long getId() {
@@ -53,10 +55,18 @@ public class PersonDTO {
         this.lastName = lastName;
     }
 
+    public Date getBirthDay() {
+        return birthDay;
+    }
+
+    public void setBirthDay(Date birthDay) {
+        this.birthDay = birthDay;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
-        PersonDTO personDTO = (PersonDTO) o;
+        PersonDTOV2 personDTO = (PersonDTOV2) o;
         return Objects.equals(id, personDTO.id);
     }
 
@@ -73,6 +83,7 @@ public class PersonDTO {
                 ", address='" + address + '\'' +
                 ", gender='" + gender + '\'' +
                 ", lastName='" + lastName + '\'' +
+                ", birthDay='" + birthDay + '\'' +
                 '}';
     }
 }

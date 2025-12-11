@@ -1,8 +1,10 @@
 package com.devcaleb.rest_spring_boot_with_java.services;
 
-import com.devcaleb.rest_spring_boot_with_java.data.dto.PersonDTO;
+import com.devcaleb.rest_spring_boot_with_java.data.dto.v1.PersonDTO;
+import com.devcaleb.rest_spring_boot_with_java.data.dto.v2.PersonDTOV2;
 import com.devcaleb.rest_spring_boot_with_java.exceptions.ResourceNotFoundException;
 import com.devcaleb.rest_spring_boot_with_java.mapper.ObjectMapper;
+import com.devcaleb.rest_spring_boot_with_java.mapper.custom.PersonMapper;
 import com.devcaleb.rest_spring_boot_with_java.model.Person;
 import com.devcaleb.rest_spring_boot_with_java.repositories.PersonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +17,9 @@ public class PersonService {
 
     @Autowired
     private PersonRepository personRepository;
+
+    @Autowired
+    PersonMapper converter;
 
     public List<PersonDTO> findAll() {
         return ObjectMapper.parseListObjects(personRepository.findAll(), PersonDTO.class);
@@ -30,6 +35,12 @@ public class PersonService {
 
         var entity = ObjectMapper.parseObject(person, Person.class);
         return ObjectMapper.parseObject(personRepository.save(entity), PersonDTO.class);
+    }
+
+    public PersonDTOV2 createV2(PersonDTOV2 person) {
+
+        var entity = converter.convertDTOToEntity(person);
+        return converter.convertEntityToDTO(personRepository.save(entity));
     }
 
     public PersonDTO update(PersonDTO person) {

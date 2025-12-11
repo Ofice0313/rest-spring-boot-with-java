@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.List;
 
-import com.devcaleb.rest_spring_boot_with_java.data.dto.PersonDTO;
+import com.devcaleb.rest_spring_boot_with_java.data.dto.v1.PersonDTO;
 import com.devcaleb.rest_spring_boot_with_java.unitetests.mapper.mocks.MockPerson;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

@@ -3,7 +3,7 @@ package com.devcaleb.rest_spring_boot_with_java.unitetests.mapper.mocks;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.devcaleb.rest_spring_boot_with_java.data.dto.PersonDTO;
+import com.devcaleb.rest_spring_boot_with_java.data.dto.v1.PersonDTO;
 import com.devcaleb.rest_spring_boot_with_java.model.Person;
 
 public class MockPerson {

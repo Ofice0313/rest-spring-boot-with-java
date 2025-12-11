@@ -1,7 +1,7 @@
 package com.devcaleb.rest_spring_boot_with_java.controllers;
 
-import com.devcaleb.rest_spring_boot_with_java.data.dto.PersonDTO;
-import com.devcaleb.rest_spring_boot_with_java.model.Person;
+import com.devcaleb.rest_spring_boot_with_java.data.dto.v1.PersonDTO;
+import com.devcaleb.rest_spring_boot_with_java.data.dto.v2.PersonDTOV2;
 import com.devcaleb.rest_spring_boot_with_java.services.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -29,6 +29,11 @@ public class PersonController {
     @PostMapping
     public PersonDTO insert(@RequestBody PersonDTO person) {
         return service.create(person);
+    }
+
+    @PostMapping(name = "/v2")
+    public PersonDTOV2 insert(@RequestBody PersonDTOV2 person) {
+        return service.createV2(person);
     }
 
     @PutMapping
