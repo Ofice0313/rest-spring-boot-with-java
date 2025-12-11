@@ -1,1 +1,26 @@
-spring.application.name=rest-spring-boot-with-java
+spring:
+  application:
+    name: rest-spring-boot-with-java
+
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/rest_spring_boot?useSSL=false&useTimezone=true&serverTimezone=UTC&allowPublicKeyRetrieval=true
+    username: root
+    password: "@Marce1234"
+
+  jpa:
+    hibernate:
+      ddl-auto: update  # ou 'create', 'validate', 'none'
+    show-sql: true      # Para ver SQL no console
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQLDialect
+        format_sql: true  # Formata o SQL para melhor leitura
+    open-in-view: false
+
+# Configurações adicionais úteis
+logging:
+  level:
+    org.springframework: INFO
+    org.hibernate.SQL: DEBUG      # Mostra SQL
+    org.hibernate.type: TRACE     # Mostra valores dos parâmetros
