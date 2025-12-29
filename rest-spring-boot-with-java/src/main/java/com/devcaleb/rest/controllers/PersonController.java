@@ -4,6 +4,7 @@ import com.devcaleb.rest.data.dto.v1.PersonDTO;
 import com.devcaleb.rest.data.dto.v2.PersonDTOV2;
 import com.devcaleb.rest.services.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,23 +18,20 @@ public class PersonController {
     @Autowired
     private PersonService service;
 
-    @GetMapping(value = "/people")
+    @GetMapping(value = "/people",
+        produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
     public List<PersonDTO> findAll() {
         return service.findAll();
     }
 
-    @GetMapping(value = "/{id}")
+    @GetMapping(value = "/{id}", produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
     public PersonDTO findById(@PathVariable("id") Long id) {
         var person = service.findById(id);
-        person.setBirthDay(new Date());
-        //person.setPhoneNumber("+258 87 731 2374");
-        person.setPhoneNumber("");
-        person.setLastName(null);
-        person.setSensitiveData("Food's Bar");
         return person;
     }
 
-    @PostMapping
+    @PostMapping(consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE},
+            produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
     public PersonDTO insert(@RequestBody PersonDTO person) {
         return service.create(person);
     }

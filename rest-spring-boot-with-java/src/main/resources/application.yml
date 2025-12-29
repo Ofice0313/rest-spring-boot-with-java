@@ -2,6 +2,7 @@ spring:
   application:
     name: rest-spring-boot-with-java
 
+
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/rest_spring_boot?useSSL=false&useTimezone=true&serverTimezone=UTC&allowPublicKeyRetrieval=true
@@ -10,7 +11,7 @@ spring:
 
   jpa:
     hibernate:
-      ddl-auto: update  # update => ou 'create', 'validate', 'none'
+      ddl-auto: none #update  # update => ou 'create', 'validate', 'none'
     show-sql: true      # Para ver SQL no console
     properties:
       hibernate:
@@ -18,7 +19,10 @@ spring:
         format_sql: true  # Formata o SQL para melhor leitura
     open-in-view: false
 
-  # Configuração do Flyway
+  jackson:
+    serialization:
+      indent-output: true
+  # Configuraï¿½ï¿½o do Flyway
 #  flyway:
 #    enabled: true
 #    locations: classpath:db/migration
@@ -29,11 +33,11 @@ spring:
 #    # clean-disabled: false
 #    schemas: rest_spring_boot
 
-# Configurações adicionais úteis
+# Configuraï¿½ï¿½es adicionais ï¿½teis
 logging:
   level:
     root: WARN
     # org.springframework: INFO
     # org.hibernate.SQL: DEBUG      # Mostra SQL
-    # org.hibernate.type: TRACE     # Mostra valores dos parâmetros
+    # org.hibernate.type: TRACE     # Mostra valores dos parï¿½metros
     # com.devcaleb: INFO
