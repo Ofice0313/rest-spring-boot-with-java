@@ -1,5 +1,6 @@
 package com.devcaleb.rest.services;
 
+import com.devcaleb.rest.controllers.PersonController;
 import com.devcaleb.rest.data.dto.v1.PersonDTO;
 import com.devcaleb.rest.data.dto.v2.PersonDTOV2;
 import com.devcaleb.rest.exceptions.ResourceNotFoundException;
@@ -8,6 +9,9 @@ import com.devcaleb.rest.mapper.custom.PersonMapper;
 import com.devcaleb.rest.model.Person;
 import com.devcaleb.rest.repositories.PersonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
+
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -28,7 +32,9 @@ public class PersonService {
     public PersonDTO findById(Long id) {
         var entity = personRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("No records for this ID!"));
-        return ObjectMapper.parseObject(entity, PersonDTO.class);
+        var dto = ObjectMapper.parseObject(entity, PersonDTO.class);
+        dto.add(linkTo(methodOn(PersonController.class).findById(id)).withSelfRel().withType("GET"));
+        return dto;
     }
 
     public PersonDTO create(PersonDTO person) {

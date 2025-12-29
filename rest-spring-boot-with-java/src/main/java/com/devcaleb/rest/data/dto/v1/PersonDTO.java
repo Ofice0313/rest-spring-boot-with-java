@@ -1,16 +1,12 @@
 package com.devcaleb.rest.data.dto.v1;
 
-import com.devcaleb.rest.serializer.GenderSerializer;
-import com.fasterxml.jackson.annotation.JsonFilter;
-import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import org.springframework.hateoas.RepresentationModel;
 
 import java.util.Date;
 import java.util.Objects;
 
 //@JsonPropertyOrder({"id", "address", "first_name", "last_name", "gender"})
-public class PersonDTO {
+public class PersonDTO extends RepresentationModel<PersonDTO> {
 
     private Long id;
     private String firstName;
