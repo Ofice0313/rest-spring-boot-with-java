@@ -3,6 +3,7 @@ package com.devcaleb.rest.services;
 import com.devcaleb.rest.controllers.PersonController;
 import com.devcaleb.rest.data.dto.v1.PersonDTO;
 import com.devcaleb.rest.data.dto.v2.PersonDTOV2;
+import com.devcaleb.rest.exceptions.RequiredObjectIsNullException;
 import com.devcaleb.rest.exceptions.ResourceNotFoundException;
 import com.devcaleb.rest.mapper.ObjectMapper;
 import com.devcaleb.rest.mapper.custom.PersonMapper;
@@ -41,6 +42,7 @@ public class PersonService {
 
     public PersonDTO create(PersonDTO person) {
 
+        if(person == null) throw new RequiredObjectIsNullException();
         var entity = ObjectMapper.parseObject(person, Person.class);
         var dto = ObjectMapper.parseObject(personRepository.save(entity), PersonDTO.class);
         addHateoasLinks(dto);
@@ -54,6 +56,9 @@ public class PersonService {
 //    }
 
     public PersonDTO update(PersonDTO person) {
+
+        if(person == null) throw new RequiredObjectIsNullException();
+
         Person entity = personRepository.findById(person.getId())
                 .orElseThrow(() -> new ResourceNotFoundException("No records for this ID!"));
         entity.setFirstName(person.getFirstName());

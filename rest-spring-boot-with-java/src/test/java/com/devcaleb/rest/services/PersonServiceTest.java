@@ -1,6 +1,7 @@
 package com.devcaleb.rest.services;
 
 import com.devcaleb.rest.data.dto.v1.PersonDTO;
+import com.devcaleb.rest.exceptions.RequiredObjectIsNullException;
 import com.devcaleb.rest.model.Person;
 import com.devcaleb.rest.repositories.PersonRepository;
 import com.devcaleb.rest.unitetests.mapper.mocks.MockPerson;
@@ -142,6 +143,18 @@ class PersonServiceTest {
     }
 
     @Test
+    void testCreateWithNullPerson() {
+        Exception exception = assertThrows(RequiredObjectIsNullException.class,
+                ()-> {
+                    service.create(null);
+                });
+        String expectedMessage = "It is not allowed to persist a null object!";
+        String actualMessage = exception.getMessage();
+
+        assertTrue(actualMessage.contains(expectedMessage));
+    }
+
+    @Test
     void update() {
 
         Person person = input.mockEntity(1);
@@ -198,6 +211,18 @@ class PersonServiceTest {
     }
 
     @Test
+    void testUpdateWithNullPerson() {
+        Exception exception = assertThrows(RequiredObjectIsNullException.class,
+                ()-> {
+                    service.update(null);
+                });
+        String expectedMessage = "It is not allowed to persist a null object!";
+        String actualMessage = exception.getMessage();
+
+        assertTrue(actualMessage.contains(expectedMessage));
+    }
+
+    @Test
     void delete() {
 
         Person person = input.mockEntity(1);
@@ -207,7 +232,7 @@ class PersonServiceTest {
 
         verify(repository, times(1)).findById(anyLong());
         verify(repository, times(1)).delete(any(Person.class));
-        verifyNoInteractions(repository);
+        verifyNoMoreInteractions(repository);
     }
 
     @Test
