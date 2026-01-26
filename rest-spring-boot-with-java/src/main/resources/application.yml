@@ -6,8 +6,8 @@ spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/rest_spring_boot?useSSL=false&useTimezone=true&serverTimezone=UTC&allowPublicKeyRetrieval=true
-    username: root
-    password: "@Marce1234"
+    username: springstudent
+    password: "springstudent"
 
   jpa:
     hibernate:
