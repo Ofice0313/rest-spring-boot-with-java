@@ -1,4 +1,4 @@
-package com.devcaleb.rest.unitetests.mapper.mocks;
+package com.devcaleb.rest.unitetests.mocks;
 
 import com.devcaleb.rest.data.dto.v1.BookDTO;
 import com.devcaleb.rest.model.Book;

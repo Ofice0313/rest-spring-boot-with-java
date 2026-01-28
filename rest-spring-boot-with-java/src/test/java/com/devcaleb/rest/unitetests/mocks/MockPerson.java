@@ -1,4 +1,4 @@
-package com.devcaleb.rest.unitetests.mapper.mocks;
+package com.devcaleb.rest.unitetests.mocks;
 
 import java.util.ArrayList;
 import java.util.List;

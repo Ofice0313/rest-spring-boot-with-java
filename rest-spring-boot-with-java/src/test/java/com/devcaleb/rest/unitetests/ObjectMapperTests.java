@@ -1,4 +1,4 @@
-package com.devcaleb.rest.unitetests.mapper;
+package com.devcaleb.rest.unitetests;
 import static com.devcaleb.rest.mapper.ObjectMapper.parseListObjects;
 import static com.devcaleb.rest.mapper.ObjectMapper.parseObject;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import java.util.List;
 
 import com.devcaleb.rest.data.dto.v1.PersonDTO;
-import com.devcaleb.rest.unitetests.mapper.mocks.MockPerson;
+import com.devcaleb.rest.unitetests.mocks.MockPerson;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
