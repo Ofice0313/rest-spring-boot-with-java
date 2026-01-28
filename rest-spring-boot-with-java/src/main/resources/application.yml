@@ -1,8 +1,8 @@
+cors:
+  originPatterns: http://localhost:8080, http://localhost:3000
 spring:
   application:
     name: rest-spring-boot-with-java
-
-
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/rest_spring_boot?useSSL=false&useTimezone=true&serverTimezone=UTC&allowPublicKeyRetrieval=true
@@ -36,7 +36,7 @@ spring:
 # Configura��es adicionais �teis
 logging:
   level:
-    root: WARN
+    root: INFO
     # org.springframework: INFO
     # org.hibernate.SQL: DEBUG      # Mostra SQL
     # org.hibernate.type: TRACE     # Mostra valores dos par�metros
