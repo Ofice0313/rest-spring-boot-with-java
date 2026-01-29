@@ -4,6 +4,7 @@ import com.devcaleb.rest.config.TestConfigs;
 import com.devcaleb.rest.integrationtests.dto.PersonDTO;
 import com.devcaleb.rest.integrationtests.testcontainers.AbstractIntegrationTest;
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.restassured.builder.RequestSpecBuilder;
@@ -14,6 +15,8 @@ import io.restassured.specification.RequestSpecification;
 import org.junit.jupiter.api.*;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
+
+import java.util.List;
 
 import static io.restassured.RestAssured.given;
 import static org.junit.jupiter.api.Assertions.*;
@@ -179,6 +182,49 @@ class PersonControllerJsonTest extends AbstractIntegrationTest {
                     .delete("{id}")
                 .then()
                     .statusCode(204);
+    }
+
+    @Test
+    @Order(6)
+    void findAllTest() throws JsonProcessingException {
+
+        var content = given(specification)
+                .accept(MediaType.APPLICATION_JSON_VALUE)
+                .when()
+                .get()
+                .then()
+                .statusCode(200)
+                .contentType(MediaType.APPLICATION_JSON_VALUE)
+                .extract()
+                .body()
+                .asString();
+
+        List<PersonDTO> people = objectMapper.readValue(content, new TypeReference<List<PersonDTO>>() {});
+
+
+        PersonDTO personOne = people.get(0);
+
+        assertNotNull(personOne.getId());
+
+        assertTrue(personOne.getId() > 0);
+
+        assertEquals("Delmira Samuel", personOne.getFirstName());
+        assertEquals("Simbine", personOne.getLastName());
+        assertEquals("Beira", personOne.getAddress());
+        assertEquals("Female", personOne.getGender());
+        assertTrue(personOne.getEnabled());
+
+        PersonDTO personTwo = people.get(2);
+
+        assertNotNull(personTwo.getId());
+
+        assertTrue(personTwo.getId() > 0);
+
+        assertEquals("Marcelo Caleb", personTwo.getFirstName());
+        assertEquals("Ofice", personTwo.getLastName());
+        assertEquals("Luis Cabral - Cidade de Maputo", personTwo.getAddress());
+        assertEquals("Male", personTwo.getGender());
+        assertTrue(personTwo.getEnabled());
     }
 
     private void mockPerson() {
