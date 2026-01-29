@@ -13,6 +13,7 @@ public class PersonDTO extends RepresentationModel<PersonDTO> {
     private String lastName;
     private String address;
     private String gender;
+    private Boolean enabled;
 
 
     public PersonDTO() {
@@ -56,6 +57,14 @@ public class PersonDTO extends RepresentationModel<PersonDTO> {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+
+    public Boolean getEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(Boolean enabled) {
+        this.enabled = enabled;
     }
 
     @Override

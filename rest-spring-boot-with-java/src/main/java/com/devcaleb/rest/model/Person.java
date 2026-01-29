@@ -22,6 +22,8 @@ public class Person {
     @Column(name = "last_name", nullable = false, length = 80)
     @JsonProperty("last_name")
     private String lastName;
+    @Column(nullable = false)
+    private Boolean enabled;
 
     public Person() {
     }
@@ -64,6 +66,14 @@ public class Person {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+
+    public Boolean getEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(Boolean enabled) {
+        this.enabled = enabled;
     }
 
     @Override
