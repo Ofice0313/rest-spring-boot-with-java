@@ -4,6 +4,7 @@ import com.devcaleb.rest.data.dto.v1.BookDTO;
 import com.devcaleb.rest.exceptions.RequiredObjectIsNullException;
 import com.devcaleb.rest.model.Book;
 import com.devcaleb.rest.repositories.BookRepository;
+import com.devcaleb.rest.services.BookService;
 import com.devcaleb.rest.unitetests.mocks.MockBook;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

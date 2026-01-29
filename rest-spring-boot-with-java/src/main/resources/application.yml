@@ -45,3 +45,8 @@ spring-doc:
   paths-to-match: /api/**/v1/**
   swagger-ui:
     use-root-path: true
+
+testcontainers:
+  docker:
+    socket:
+      override: npipe:////./pipe/docker_engine

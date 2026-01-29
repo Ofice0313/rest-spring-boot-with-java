@@ -22,3 +22,8 @@ spring-doc:
   paths-to-match: "/api/**/V1/**"
   swagger-ui:
     use-root-path: true
+# Desativa o reuso de containers e força reset
+testcontainers:
+  reuse:
+    enable: false
+

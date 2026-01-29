@@ -4,6 +4,7 @@ import com.devcaleb.rest.data.dto.v1.PersonDTO;
 import com.devcaleb.rest.exceptions.RequiredObjectIsNullException;
 import com.devcaleb.rest.model.Person;
 import com.devcaleb.rest.repositories.PersonRepository;
+import com.devcaleb.rest.services.PersonService;
 import com.devcaleb.rest.unitetests.mocks.MockPerson;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

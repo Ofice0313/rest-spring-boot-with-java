@@ -1,5 +1,6 @@
 package com.devcaleb.rest.integrationtests.testcontainers;
 
+import org.junit.jupiter.api.AfterAll;
 import org.springframework.context.ApplicationContextInitializer;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.core.env.ConfigurableEnvironment;
@@ -16,10 +17,14 @@ public class AbstractIntegrationTest {
 
     static class Initializer implements ApplicationContextInitializer<ConfigurableApplicationContext> {
 
-        static MySQLContainer<?> mysql = new MySQLContainer<>("mysql:9.1.0");
+        static MySQLContainer<?> mysql = new MySQLContainer<>("mysql:8.0.40");
 
         private void startcontainers() {
             Startables.deepStart(Stream.of(mysql)).join();
+            if (!mysql.isRunning()) {
+                throw new RuntimeException("Failed to start MySQL container");
+            }
+            System.out.println("MySQL Container started: " + mysql.getJdbcUrl());
         }
 
         private static Map<String, String> createConnectionConfiguration() {
@@ -36,10 +41,14 @@ public class AbstractIntegrationTest {
             ConfigurableEnvironment environment = applicationContext.getEnvironment();
             MapPropertySource textContainers = new MapPropertySource("textContainers",
                     (Map) createConnectionConfiguration()
-                    );
+            );
             environment.getPropertySources().addFirst(textContainers);
         }
 
-
+        @AfterAll
+        static void stopContainers() {
+            mysql.stop();
+        }
     }
 }
+
