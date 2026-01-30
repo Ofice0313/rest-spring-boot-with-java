@@ -1,11 +1,13 @@
 package com.devcaleb.rest.data.dto.v1;
 
 import org.springframework.hateoas.RepresentationModel;
+import org.springframework.hateoas.server.core.Relation;
 
 import java.util.Date;
 import java.util.Objects;
 
 //@JsonPropertyOrder({"id", "address", "first_name", "last_name", "gender"})
+@Relation(collectionRelation = "people")
 public class PersonDTO extends RepresentationModel<PersonDTO> {
 
     private Long id;
