@@ -1,10 +1,12 @@
 package com.devcaleb.rest.data.dto.v1;
 
 import org.springframework.hateoas.RepresentationModel;
+import org.springframework.hateoas.server.core.Relation;
 
 import java.util.Date;
 import java.util.Objects;
 
+@Relation(collectionRelation = "books")
 public class BookDTO extends RepresentationModel<BookDTO> {
 
     private Long id;
