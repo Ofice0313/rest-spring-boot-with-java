@@ -2,9 +2,9 @@ package com.devcaleb.rest.integrationtests.controllers.withjson;
 
 import com.devcaleb.rest.config.TestConfigs;
 import com.devcaleb.rest.integrationtests.dto.PersonDTO;
+import com.devcaleb.rest.integrationtests.dto.wrappers.WrapperPersonDTO;
 import com.devcaleb.rest.integrationtests.testcontainers.AbstractIntegrationTest;
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.restassured.builder.RequestSpecBuilder;
@@ -190,6 +190,7 @@ class PersonControllerJsonTest extends AbstractIntegrationTest {
 
         var content = given(specification)
                 .accept(MediaType.APPLICATION_JSON_VALUE)
+                .queryParam("page", 3, "size", 12, "direction", "asc")
                 .when()
                 .get()
                 .then()
@@ -199,8 +200,8 @@ class PersonControllerJsonTest extends AbstractIntegrationTest {
                 .body()
                 .asString();
 
-        List<PersonDTO> people = objectMapper.readValue(content, new TypeReference<List<PersonDTO>>() {});
-
+        WrapperPersonDTO wrapper = objectMapper.readValue(content, WrapperPersonDTO.class);
+        List<PersonDTO> people = wrapper.getEmbeddedDTO().getPeople();
 
         PersonDTO personOne = people.get(0);
 
