@@ -11,7 +11,7 @@ spring:
 
   jpa:
     hibernate:
-      ddl-auto: none #update  # update => ou 'create', 'validate', 'none'
+      ddl-auto: update  # update => ou 'create', 'validate', 'none'
     show-sql: true      # Para ver SQL no console
     properties:
       hibernate:
