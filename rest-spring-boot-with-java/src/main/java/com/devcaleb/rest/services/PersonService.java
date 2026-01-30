@@ -2,7 +2,6 @@ package com.devcaleb.rest.services;
 
 import com.devcaleb.rest.controllers.PersonController;
 import com.devcaleb.rest.data.dto.v1.PersonDTO;
-import com.devcaleb.rest.data.dto.v2.PersonDTOV2;
 import com.devcaleb.rest.exceptions.RequiredObjectIsNullException;
 import com.devcaleb.rest.exceptions.ResourceNotFoundException;
 import com.devcaleb.rest.mapper.ObjectMapper;
@@ -41,6 +40,26 @@ public class PersonService {
     public PagedModel<EntityModel<PersonDTO>> findAll(Pageable pageable) {
 
         var persons = personRepository.findAll(pageable);
+
+        var peopleWithLinks = persons.map(person -> {
+            var dto = ObjectMapper.parseObject(person, PersonDTO.class);
+            addHateoasLinks(dto);
+            return dto;
+        });
+
+        Link findAllLink = WebMvcLinkBuilder.linkTo(
+                WebMvcLinkBuilder.methodOn(PersonController.class)
+                        .findAll(
+                                pageable.getPageNumber(),
+                                pageable.getPageSize(),
+                                String.valueOf(pageable.getSort())))
+                        .withSelfRel();
+        return assembler.toModel(peopleWithLinks, findAllLink);
+    }
+
+    public PagedModel<EntityModel<PersonDTO>> findByName(String firstName, Pageable pageable) {
+
+        var persons = personRepository.findPeopleByName(firstName, pageable);
 
         var peopleWithLinks = persons.map(person -> {
             var dto = ObjectMapper.parseObject(person, PersonDTO.class);
