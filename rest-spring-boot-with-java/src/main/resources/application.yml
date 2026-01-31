@@ -8,10 +8,15 @@ spring:
     url: jdbc:mysql://localhost:3306/rest_spring_boot?useSSL=false&useTimezone=true&serverTimezone=UTC&allowPublicKeyRetrieval=true
     username: springstudent
     password: "springstudent"
+  security:
+    jwt:
+      token:
+        secret-key: 53cr37
+        expire-length: 3600000
 
   jpa:
     hibernate:
-      ddl-auto: update  # update => ou 'create', 'validate', 'none'
+      ddl-auto: update #create #update  # update => ou 'create', 'validate', 'none'
     show-sql: true      # Para ver SQL no console
     properties:
       hibernate:
